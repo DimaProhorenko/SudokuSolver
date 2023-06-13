@@ -11,8 +11,15 @@ public class Board {
         grid = new int[Constants.GRID_SIZE][Constants.GRID_SIZE];
         generateBoard();
     }
+    public Board(String puzzleString) {
+        grid = generateGrid(puzzleString);
+    }
 
-    public void generateBoard() {
+    public int[][] getGrid() {
+        return grid;
+    }
+
+    private void generateBoard() {
         int rowPosition = Helpers.getRandomInt(Constants.MIN_VALID_NUMBER, Constants.MAX_VALID_NUMBER);
         int colPosition = Helpers.getRandomInt(Constants.MIN_VALID_NUMBER, Constants.MAX_VALID_NUMBER);
         int firstValue = Helpers.getRandomInt(Constants.MIN_VALID_NUMBER, Constants.MAX_VALID_NUMBER);
@@ -20,8 +27,16 @@ public class Board {
         solve();
     }
 
-    public int[][] getGrid() {
-        return grid;
+    private int[][] generateGrid(String gridString) {
+        int[][] resultGrid = new int[Constants.GRID_SIZE][Constants.GRID_SIZE];
+        int counter = 0;
+        for (int row = 0; row < Constants.GRID_SIZE; row++) {
+            for (int col = 0; col < Constants.GRID_SIZE; col++) {
+                resultGrid[row][col] = Integer.parseInt(String.valueOf(gridString.charAt(counter)));
+                counter++;
+            }
+        }
+        return resultGrid;
     }
 
 
