@@ -9,41 +9,19 @@ public class Sudoku {
         this.board = board;
     }
 
-    private boolean isNumberInRow(int number, int row) {
-        for (int i = 0; i < Constants.GRID_SIZE; i++) {
-            if (board.getGrid()[row][i] == number) {
-                return true;
+    public void printBoard() {
+        int[][] grid = board.getGrid();
+        for (int row = 0; row < Constants.GRID_SIZE; row++) {
+            if (row % Constants.BOX_SIZE == 0 && row != 0) {
+                System.out.println("-".repeat(Constants.GRID_SIZE + Constants.BOX_SIZE - 1));
             }
-        }
-        return false;
-    }
-
-    private boolean isNumberInColumn(int number, int column) {
-        for (int i = 0; i < Constants.GRID_SIZE; i++) {
-            if (board.getGrid()[i][column] == number) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isNumberInBox(int number, int row, int column) {
-        int beginRow = row - row % Constants.BOX_SIZE;
-        int beginCol = column - column % Constants.BOX_SIZE;
-
-        for (int i = beginRow; i < beginRow + Constants.BOX_SIZE; i++) {
-            for (int j = beginCol; j < beginCol + Constants.BOX_SIZE; j++) {
-                if (board.getGrid()[i][j] == number) {
-                    return true;
+            for (int col = 0; col < Constants.GRID_SIZE; col++) {
+                if (col % Constants.BOX_SIZE == 0 && col != 0) {
+                    System.out.print("|");
                 }
+                System.out.print(grid[row][col]);
             }
+            System.out.println();
         }
-        return false;
-    }
-
-    private boolean isPlacementValid(int number, int row, int column) {
-        return (!isNumberInRow(number, row) &&
-                !isNumberInColumn(number, column) &&
-                !isNumberInBox(number, row, column));
     }
 }
