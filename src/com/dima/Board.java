@@ -78,7 +78,7 @@ public class Board {
                 !isNumberInBox(number, row, column));
     }
 
-    private boolean solve() {
+    public boolean solve() {
         for (int row = 0; row < Constants.GRID_SIZE; row++) {
             for (int column = 0; column < Constants.GRID_SIZE; column++) {
                 if (grid[row][column] == 0) {
