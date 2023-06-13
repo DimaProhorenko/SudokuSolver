@@ -23,7 +23,11 @@ public class Sudoku {
                 if (col % Constants.BOX_SIZE == 0 && col != 0) {
                     System.out.print("|");
                 }
-                System.out.print(grid[row][col] + " ");
+                if (grid[row][col] == 0) {
+                    System.out.print(". ");
+                } else {
+                    System.out.print(grid[row][col] + " ");
+                }
             }
             System.out.println();
         }
