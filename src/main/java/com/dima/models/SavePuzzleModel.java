@@ -3,6 +3,7 @@ package com.dima.models;
 import com.dima.Board;
 import com.dima.database.DBConnection;
 import com.dima.database.DBConstants;
+import com.dima.entities.Puzzle;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,17 +12,17 @@ import java.util.Date;
 
 public class SavePuzzleModel {
 
-    public boolean savePuzzleToDB(String[] data) {
+    public boolean savePuzzleToDB(Puzzle puzzle) {
         String sql = "INSERT INTO %s (%s, %s, %s, %s) VALUES(?, ?, ?, ?)"
                 .formatted(DBConstants.TABLE_PUZZLES,
                         DBConstants.COLUMN_PUZZLES_NAME, DBConstants.COLUMN_PUZZLES_DIFFICULTY,
                         DBConstants.COLUMN_PUZZLES_PUZZLE, DBConstants.COLUMN_PUZZLES_DOC
                         );
         try (PreparedStatement pstmt = DBConnection.getConnection().prepareStatement(sql)) {
-            pstmt.setString(1, data[0]);
-            pstmt.setString(2, "Easy");
-            pstmt.setString(3, data[1]);
-            pstmt.setString(4, new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+            pstmt.setString(1, puzzle.getName());
+            pstmt.setString(2, puzzle.getDifficulty());
+            pstmt.setString(3, puzzle.getPuzzleString());
+            pstmt.setString(4, puzzle.getDocString());
             pstmt.executeUpdate();
             return true;
         } catch (SQLException e) {

@@ -2,7 +2,6 @@ package com.dima;
 
 import com.dima.controllers.MainMenuController;
 import com.dima.database.DBConnection;
-import com.dima.entities.Puzzle;
 
 public class Main {
     public static void main(String[] args) {

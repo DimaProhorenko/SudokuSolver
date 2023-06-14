@@ -1,5 +1,6 @@
 package com.dima.controllers;
 
+import com.dima.entities.Puzzle;
 import com.dima.models.SavePuzzleModel;
 import com.dima.views.SavePuzzleView;
 
@@ -13,9 +14,9 @@ public class SavePuzzleController {
     }
 
     public void handleData() {
-        String[] puzzleData = view.getData();
-        if (model.validatePuzzleString(puzzleData[1])) {
-            if (model.savePuzzleToDB(puzzleData)) {
+        Puzzle puzzle  = view.getData();
+        if (model.validatePuzzleString(puzzle.getPuzzleString())) {
+            if (model.savePuzzleToDB(puzzle)) {
                 view.printSuccessMessage();
             }
         } else {
