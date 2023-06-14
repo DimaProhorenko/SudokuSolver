@@ -19,6 +19,52 @@ public class Board {
         return grid;
     }
 
+    public void printBoard() {
+        for (int row = 0; row < Constants.GRID_SIZE; row++) {
+            if (row % Constants.BOX_SIZE == 0 && row != 0) {
+                for (int i = 0; i < Constants.GRID_SIZE * 2 + 1; i++) {
+                    System.out.print("-");
+                }
+                System.out.println();
+
+            }
+            for (int col = 0; col < Constants.GRID_SIZE; col++) {
+                if (col % Constants.BOX_SIZE == 0 && col != 0) {
+                    System.out.print("|");
+                }
+                if (grid[row][col] == 0) {
+                    System.out.print(". ");
+                } else {
+                    System.out.print(grid[row][col] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public boolean solve() {
+        for (int row = 0; row < Constants.GRID_SIZE; row++) {
+            for (int column = 0; column < Constants.GRID_SIZE; column++) {
+                if (grid[row][column] == 0) {
+                    for (int numberToTry = 1; numberToTry <= Constants.GRID_SIZE; numberToTry++) {
+                        if (isPlacementValid(numberToTry, row, column)) {
+                            grid[row][column] = numberToTry;
+
+                            if (solve()) {
+                                return true;
+                            }
+                            else {
+                                grid[row][column] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private void generateBoard() {
         int rowPosition = Helpers.getRandomInt(Constants.MIN_VALID_NUMBER, Constants.MAX_VALID_NUMBER);
         int colPosition = Helpers.getRandomInt(Constants.MIN_VALID_NUMBER, Constants.MAX_VALID_NUMBER);
@@ -78,26 +124,5 @@ public class Board {
                 !isNumberInBox(number, row, column));
     }
 
-    public boolean solve() {
-        for (int row = 0; row < Constants.GRID_SIZE; row++) {
-            for (int column = 0; column < Constants.GRID_SIZE; column++) {
-                if (grid[row][column] == 0) {
-                    for (int numberToTry = 1; numberToTry <= Constants.GRID_SIZE; numberToTry++) {
-                        if (isPlacementValid(numberToTry, row, column)) {
-                            grid[row][column] = numberToTry;
 
-                            if (solve()) {
-                                return true;
-                            }
-                            else {
-                                grid[row][column] = 0;
-                            }
-                        }
-                    }
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
