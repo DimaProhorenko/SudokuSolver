@@ -34,9 +34,12 @@ public class MainMenuController {
         Paths path = null;
         while (path != Paths.EXIT) {
             path = view.getData();
-//            switch (path) {
-//                case SAVE_PUZZLE -> System.out.println();
-//            }
+            switch (path) {
+                case SAVE_PUZZLE -> {
+                    SavePuzzleController controller = new SavePuzzleController();
+                    controller.handleData();
+                }
+            }
         }
     }
 
