@@ -8,7 +8,6 @@ public class DBConnection {
     private static Connection conn;
 
     public static boolean connect() {
-        System.out.println(DBConstants.DB_CONNECTION_URL);
         try {
             conn = DriverManager.getConnection(DBConstants.DB_CONNECTION_URL);
             return true;
